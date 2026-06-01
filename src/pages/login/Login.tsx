@@ -12,7 +12,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import type { UsuarioLogin } from "../../models/UsuarioLogin";
 
 import googleLogo from "../../assets/logos/google.png";
-import appleLogo from "../../assets/logos/apple.png";
 
 function Login() {
     const navigate = useNavigate();
@@ -47,45 +46,8 @@ function Login() {
                         Faça Login
                     </h2>
 
-                    <div className="flex gap-4 mb-6">
-                        <button
-                            type="button"
-                            className="flex-1 flex items-center justify-center gap-2 border border-gray-300 bg-gray-50 rounded-md h-14 hover:bg-gray-100 transition"
-                        >
-                            <img
-                                src={googleLogo}
-                                alt="Google"
-                                className="w-5 h-5"
-                            />
-                            <span>Google</span>
-                        </button>
-
-                        <button
-                            type="button"
-                            className="flex-1 flex items-center justify-center gap-2 border border-gray-300 bg-gray-50 rounded-md h-14 hover:bg-gray-100 transition"
-                        >
-                            <img
-                                src={appleLogo}
-                                alt="Apple"
-                                className="w-5 h-5"
-                            />
-                            <span>Apple</span>
-                        </button>
-                    </div>
-
-                    <div className="relative text-center mb-6">
-                        <span className="bg-white px-3 relative z-10 text-gray-500">
-                            ou
-                        </span>
-
-                        <div className="absolute left-0 top-1/2 w-full h-px bg-gray-300"></div>
-                    </div>
-
                     <div className="mb-5">
-                        <label
-                            htmlFor="email"
-                            className="block font-medium mb-2"
-                        >
+                        <label htmlFor="email" className="block font-medium mb-2">
                             Email
                         </label>
 
@@ -103,19 +65,10 @@ function Login() {
 
                     <div className="mb-6">
                         <div className="flex justify-between mb-2">
-                            <label
-                                htmlFor="senha"
-                                className="font-medium"
-                            >
+                            <label htmlFor="senha" className="font-medium">
                                 Senha
                             </label>
 
-                            <Link
-                                to="/recuperar-senha"
-                                className="text-indigo-600 hover:underline"
-                            >
-                                Esqueceu sua senha?
-                            </Link>
                         </div>
 
                         <input
@@ -140,6 +93,14 @@ function Login() {
                         ) : (
                             "Entrar"
                         )}
+                    </button>
+                    <div className="relative text-center mt-6"> <span className="bg-white px-3 relative z-10 text-gray-500"> ou </span> <div className="absolute left-0 top-1/2 w-full h-px bg-gray-300"></div> </div>
+                    <button
+                        type="button"
+                        className="w-full mt-4 flex items-center justify-center gap-2 border border-gray-300 bg-gray-50 rounded-md h-14 hover:bg-gray-100 transition"
+                    >
+                        <img src={googleLogo} alt="Google" className="w-5 h-5" />
+                        <span>Entrar com Google</span>
                     </button>
 
                     <p className="text-center mt-6">
