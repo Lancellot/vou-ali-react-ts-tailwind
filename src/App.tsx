@@ -4,6 +4,8 @@ import Login from './pages/login/Login'
 import { AuthProvider } from './contexts/AuthContext'
 import { ToastContainer } from 'react-toastify'
 import Cadastro from './pages/cadastro/Cadastro'
+import Navbar from './components/navbar/Navbar'
+import Footer from './components/footer/Footer'
 
 function App() {
 
@@ -14,10 +16,10 @@ function App() {
         <BrowserRouter>
           <div className="min-h-screen flex flex-col">
             <header>
-
+              <Navbar/>
             </header>
 
-            <main>
+            <main className="flex-1">
               <Routes>
                 <Route path='/cadastro' element={<Cadastro />} />
                 <Route path='/login' element={<Login />} />
@@ -26,7 +28,7 @@ function App() {
               </Routes>
             </main>
 
-
+          <Footer />
           </div>
         </BrowserRouter>
       </AuthProvider>
