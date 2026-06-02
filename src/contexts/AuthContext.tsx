@@ -116,7 +116,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const handleLogout = useCallback(() => {
         localStorage.clear();
         setUsuario(usuarioInicial);
-        ToastAlerta('Logout realizado com sucesso!', 'sucesso');
+        ToastAlerta('Usuário deslogado com sucesso', 'sucesso');
     }, []);
 
     return (
