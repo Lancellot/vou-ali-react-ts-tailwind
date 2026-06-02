@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import Cadastro from './pages/cadastro/Cadastro'
 import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
+import Home from './pages/home/Home'
 
 function App() {
 
@@ -21,10 +22,12 @@ function App() {
 
             <main className="flex-1">
               <Routes>
+
+                <Route path='*' element={<Home />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/home' element={<Home />} />
                 <Route path='/cadastro' element={<Cadastro />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='*' element={<Login />} />
-                <Route path='/' element={<Login />} />
               </Routes>
             </main>
 

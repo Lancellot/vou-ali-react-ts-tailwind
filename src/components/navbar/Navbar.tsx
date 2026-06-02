@@ -29,7 +29,7 @@ function Navbar() {
     ];
 
     return (
-        <nav className="w-full flex justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-md">
+        <nav className="w-full flex justify-center bg-linear-to-r from-slate-900 to-indigo-500 text-white shadow-md">
             <section className="container flex justify-between items-center h-16 mx-8">
                 <Link
                     to="/home"
