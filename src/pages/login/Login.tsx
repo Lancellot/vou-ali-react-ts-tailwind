@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
+import { Eye, EyeOff } from 'lucide-react';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import type { UsuarioLogin } from '../../models/UsuarioLogin';
@@ -36,6 +37,8 @@ function Login() {
 
     const googleInitialized = useRef(false);
 
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+
     const handleGoogleCallback = useCallback(
         (response: GoogleCredentialResponse) => {
             if (response.credential) {
@@ -62,12 +65,12 @@ function Login() {
         window.google.accounts.id.initialize({
             client_id: clientId,
             callback: (response: GoogleCredentialResponse) => {
-            handleGoogleCallbackRef.current?.(response);
-        },
-    });
+                handleGoogleCallbackRef.current?.(response);
+            },
+        });
 
         googleInitialized.current = true;
-    }, [handleGoogleCallback]); 
+    }, [handleGoogleCallback]);
 
     function openGoogleLogin() {
         if (!window.google) {
@@ -118,20 +121,32 @@ function Login() {
                         required
                     />
 
-                    <input
-                        type="password"
-                        name="senha"
-                        placeholder="Senha"
-                        value={usuarioLogin.senha}
-                        onChange={atualizarEstado}
-                        className="mb-6 w-full h-14 px-4 border rounded-md"
-                        required
-                    />
-
+                    <div className="relative mb-6">
+                        <input
+                            type={mostrarSenha ? "text" : "password"}
+                            name="senha"
+                            placeholder="Senha"
+                            value={usuarioLogin.senha}
+                            onChange={atualizarEstado}
+                            className="mb-6 w-full h-14 px-4 border rounded-md"
+                            required
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                            className="absolute right-3 top-1/3 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        >
+                            {mostrarSenha ? (
+                                <EyeOff size={20} />
+                            ) : (
+                                <Eye size={20} />
+                            )}
+                        </button>
+                    </div>
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full h-14 bg-indigo-600 text-white rounded-md flex justify-center items-center"
+                        className="w-full h-14 bg-indigo-600 text-white rounded-md flex justify-center items-center hover:bg-indigo-700"
                     >
                         {isLoading ? <ClipLoader size={20} color="#fff" /> : 'Entrar'}
                     </button>
@@ -146,7 +161,7 @@ function Login() {
                     <button
                         type="button"
                         onClick={openGoogleLogin}
-                        className="w-full mt-4 flex items-center justify-center gap-2 border rounded-md h-14 hover:bg-gray-100"
+                        className="w-full mt-4 flex items-center justify-center gap-2 border rounded-md h-14 hover:bg-gray-100  bg-white hover:bg-gray-100"
                     >
                         <img src={googleLogo} className="w-5 h-5" />
                         Entrar com Google

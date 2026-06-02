@@ -5,6 +5,7 @@ import { ClipLoader } from 'react-spinners';
 import type { Usuario } from '../../models/Usuario';
 import { cadastrarUsuario } from '../../services/Service';
 import { ToastAlerta } from '../../utils/ToastAlerta';
+import { Eye, EyeOff } from 'lucide-react';
 
 type GoogleCredentialResponse = {
 	credential?: string;
@@ -29,6 +30,9 @@ function Cadastro() {
 		email: '',
 		senha: '',
 	});
+
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+    const [mostrarSenhaConfirmar, setMostrarSenhaConfirmar] = useState(false);
 
 	function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
 		setUsuario({
@@ -206,26 +210,49 @@ function Cadastro() {
 						className="mb-4 h-14 w-full rounded-md border border-gray-300 bg-gray-50 px-4"
 						required
 					/>
-
-					<input
-						type="password"
-						name="senha"
-						placeholder="Senha"
-						value={usuario.senha}
-						onChange={atualizarEstado}
+                    <div className="relative mb-6">
+                        <input
+                            type={mostrarSenha ? "text" : "password"}
+                            name="senha"
+                            placeholder="Senha"
+                            value={usuario.senha}
+                            onChange={atualizarEstado}
 						className="mb-4 h-14 w-full rounded-md border border-gray-300 bg-gray-50 px-4"
 						required
-					/>
-
+					    />
+                        <button
+                            type="button"
+                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                            className="absolute right-3 top-1/3 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        >
+                            {mostrarSenha ? (
+                                <EyeOff size={20} />
+                            ) : (
+                                <Eye size={20} />
+                            )}
+                        </button>
+                    </div>
+                    <div className="relative mb-6">
 					<input
-						type="password"
+						type={mostrarSenhaConfirmar ? "text" : "password"}
 						placeholder="Confirmar senha"
 						value={confirmaSenha}
 						onChange={handleConfirmaSenha}
 						className="mb-6 h-14 w-full rounded-md border border-gray-300 bg-gray-50 px-4"
 						required
 					/>
-
+                    <button
+                            type="button"
+                            onClick={() => setMostrarSenhaConfirmar(!mostrarSenhaConfirmar)}
+                            className="absolute right-3 top-1/3 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        >
+                            {mostrarSenhaConfirmar ? (
+                                <EyeOff size={20} />
+                            ) : (
+                                <Eye size={20} />
+                            )}
+                    </button>
+                    </div>
 					<button
 						type="submit"
 						disabled={isLoading}
