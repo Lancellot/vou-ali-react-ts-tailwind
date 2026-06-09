@@ -1,9 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
 
 export default function CTA() {
     const navigate = useNavigate();
+    const { isAuthenticated } = useContext(AuthContext);
+
+    if (isAuthenticated) {
+        return null; 
+    }
 
     return (
+        
         <section className="bg-linear-to-br from-emerald-950 via-emerald-800 to-emerald-600 py-20 px-6 text-center">
             <div className="container mx-auto max-w-xl text-white">
 
@@ -29,5 +37,6 @@ export default function CTA() {
 
             </div>
         </section>
+        
     );
 }
