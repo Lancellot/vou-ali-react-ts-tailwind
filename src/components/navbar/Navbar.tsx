@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import logo from "../../assets/logos/logonav.png";
 
 function Navbar() {
     const navigate = useNavigate();
@@ -13,38 +14,54 @@ function Navbar() {
 
     const navigationItems = [
         { label: "Home", path: "/home" },
+
         ...(isAuthenticated
             ? [
-                { label: "Meu Painel", path: "/dashboard" },
-                { label: "Viagem", path: "/viagens" },
+                { label: "Dashboard", path: "/dashboard" },
+                { label: "Minhas Viagens", path: "/viagens" },
             ]
             : []),
+
         { label: "Sobre", path: "/sobre" },
+
         ...(!isAuthenticated
             ? [
                 { label: "Login", path: "/login" },
-                { label: "Cadastro", path: "/cadastro" },
+                { label: "Criar Conta", path: "/cadastro" },
             ]
             : []),
     ];
 
     return (
-        <nav className="w-full flex justify-center bg-linear-to-r from-slate-900 to-indigo-500 text-white shadow-md">
-            <section className="container flex justify-between items-center h-16 mx-8">
+        <nav className="w-full bg-[#1E1F1D] text-[#DED9BE] shadow-lg border-b border-[#DED9BE]/10 backdrop-blur-sm">
+            <section className="container mx-auto px-6 flex justify-between items-center h-16">
+
                 <Link
-                    to="/home"
-                    className="text-2xl font-bold tracking-tight hover:opacity-90 transition-opacity"
+                    to={isAuthenticated ? "/dashboard" : "/home"}
+                    className="flex items-center hover:opacity-90 transition-opacity"
                 >
-                    Vou Ali
+                    <img src={logo} alt="Logo" className="h-12 w-12" />
+                    <span
+                        className="text-2xl font-bold tracking-wide text-[#DED9BE] font-(family-name:--font-playfair-display) ml-2"
+                        >
+                        Vou Ali
+                    </span>
                 </Link>
 
                 <ul className="flex items-center gap-1">
+
                     {navigationItems.map((item) => (
                         <li key={item.path}>
                             <Link
                                 to={item.path}
-                                className="text-indigo-100 hover:text-white hover:bg-white/10
-                                           text-sm font-medium px-4 py-2 rounded-md transition-all duration-200"
+                                className="
+                            text-[#DED9BE]
+                            hover:text-[#1E1F1D]
+                            hover:bg-[#DED9BE]
+                            text-sm font-medium
+                            px-4 py-2 rounded-md
+                            transition-all duration-200
+                        "
                             >
                                 {item.label}
                             </Link>
@@ -53,13 +70,25 @@ function Navbar() {
 
                     {isAuthenticated && (
                         <>
-                            <li className="w-px h-5 bg-white/20 mx-2" />
+                            <li className="hidden md:flex items-center gap-2 text-sm text-[#DED9BE] mx-2">
+                                <span className="w-2 h-2 rounded-full bg-[#DED9BE]"></span>
+                                <span>Online</span>
+                            </li>
+
+                            <li className="w-px h-5 bg-[#DED9BE]/30 mx-2" />
 
                             <li>
                                 <button
                                     onClick={logout}
-                                    className="text-red-100 hover:text-white hover:bg-red-500/20
-                                               text-sm font-medium px-4 py-2 rounded-md transition-all duration-200"
+                                    className="
+                                border border-[#DED9BE]/40
+                                text-[#DED9BE]
+                                hover:bg-[#DED9BE]
+                                hover:text-[#1E1F1D]
+                                text-sm font-medium
+                                px-4 py-2 rounded-md
+                                transition-all duration-200
+                            "
                                 >
                                     Sair
                                 </button>

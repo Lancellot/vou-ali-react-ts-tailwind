@@ -13,19 +13,20 @@ function Footer() {
     if (!isAuthenticated) return null;
 
     return (
-        <footer className="w-full bg-slate-900 text-slate-50">
+        <footer className="w-full bg-[#1E1F1D] text-[#DED9BE]">
 
-            <div className="bg-slate-800 border-b border-indigo-600/30">
+            <div className="bg-[#1E1F1D] border-b border-[#DED9BE]/20">
                 <div className="container mx-auto px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
 
                     <div className="flex flex-col gap-5">
                         <div>
                             <h2 className="text-xl font-bold tracking-tight">
-                                Vou <span className="text-indigo-500">Ali</span>
+                                Vou <span className="text-[#DED9BE]">Ali</span>
                             </h2>
-                            <p className="mt-2 text-sm text-slate-500 leading-relaxed max-w-xs">
-                                Compartilhando ideias, projetos e experiências sobre tecnologia
-                                e desenvolvimento.
+
+                            <p className="mt-2 text-sm text-[#DED9BE]/70 leading-relaxed max-w-xs">
+                                Planeje, organize e acompanhe suas viagens de forma
+                                simples e eficiente com o Vou Ali.
                             </p>
                         </div>
 
@@ -42,9 +43,16 @@ function Footer() {
                                         rel="noreferrer"
                                         className="
                                             w-10 h-10 flex items-center justify-center rounded-xl
-                                            bg-indigo-600/10 border border-indigo-600/25 text-slate-400
-                                            hover:bg-indigo-600 hover:border-indigo-600 hover:text-white
-                                            hover:-translate-y-0.5 transition-all duration-200">
+                                            bg-[#DED9BE]/5
+                                            border border-[#DED9BE]/20
+                                            text-[#DED9BE]/70
+                                            hover:bg-[#DED9BE]
+                                            hover:border-[#DED9BE]
+                                            hover:text-[#1E1F1D]
+                                            hover:-translate-y-0.5
+                                            transition-all duration-200
+                                        "
+                                    >
                                         <Icon size={18} weight="bold" />
                                     </a>
                                 </li>
@@ -53,15 +61,16 @@ function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-4">
+                        <h3 className="text-xs font-semibold tracking-widest text-[#DED9BE] uppercase mb-4">
                             Navegação
                         </h3>
+
                         <ul className="flex flex-col gap-2">
                             {["Home", "Sobre", "Contato"].map((item) => (
                                 <li key={item}>
                                     <a
-                                    href="#"
-                                    className="text-sm text-slate-400 hover:text-sky-400 transition-colors duration-200"
+                                        href="#"
+                                        className="text-sm text-[#DED9BE]/70 hover:text-[#DED9BE] transition-colors duration-200"
                                     >
                                         {item}
                                     </a>
@@ -71,15 +80,21 @@ function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="text-xs font-semibold tracking-widest text-indigo-500 uppercase mb-4">
-                            Categorias
+                        <h3 className="text-xs font-semibold tracking-widest text-[#DED9BE] uppercase mb-4">
+                            Recursos
                         </h3>
+
                         <ul className="flex flex-col gap-2">
-                            {["Tecnologia", "Desenvolvimento", "Carreira", "Projetos"].map((item) => (
+                            {[
+                                "Planejamento de Viagens",
+                                "Roteiros",
+                                "Despesas",
+                                "Atividades",
+                            ].map((item) => (
                                 <li key={item}>
                                     <a
-                                    href="#"
-                                    className="text-sm text-slate-400 hover:text-sky-400 transition-colors duration-200"
+                                        href="#"
+                                        className="text-sm text-[#DED9BE]/70 hover:text-[#DED9BE] transition-colors duration-200"
                                     >
                                         {item}
                                     </a>
@@ -91,17 +106,22 @@ function Footer() {
             </div>
 
             <div className="container mx-auto px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-[#DED9BE]/60">
                     © {year}{" "}
-                    <span className="text-indigo-500 font-semibold">Vou Ali</span>.
-                    Todos os direitos reservados.
+                    <span className="text-[#DED9BE] font-semibold">
+                        Vou Ali
+                    </span>
+                    . Todos os direitos reservados.
                 </p>
+
                 <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400">
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#DED9BE]/10 border border-[#DED9BE]/20 text-[#DED9BE]">
                         React
                     </span>
-                    <span className="w-px h-4 bg-white/10" />
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-400">
+
+                    <span className="w-px h-4 bg-[#DED9BE]/20" />
+
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#DED9BE]/10 border border-[#DED9BE]/20 text-[#DED9BE]">
                         TypeScript
                     </span>
                 </div>
@@ -111,3 +131,4 @@ function Footer() {
 }
 
 export default Footer;
+

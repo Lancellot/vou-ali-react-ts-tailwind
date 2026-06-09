@@ -166,7 +166,7 @@ function Cadastro() {
     }, []);
 
     return (
-        <div className="login-container flex min-h-screen items-center justify-center bg-indigo-500 px-4">
+        <div className="login-container flex min-h-screen items-center justify-center bg-[#1E1F1D] px-4">
             <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-xl">
                 <form onSubmit={cadastrarNovoUsuario}>
                     <h2 className="mb-6 text-center text-2xl font-semibold">Criar Conta</h2>

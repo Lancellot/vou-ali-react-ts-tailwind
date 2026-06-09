@@ -10,9 +10,9 @@ export default function Hero() {
     return (
         <section className="relative min-h-screen bg-linear-to-br from-emerald-950 via-emerald-800 to-emerald-500 flex items-center overflow-hidden">
 
-            <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-white/[0.04] pointer-events-none" />
-            <div className="absolute -bottom-28 -left-14 w-[500px] h-[500px] rounded-full bg-white/[0.03] pointer-events-none" />
-            <div className="absolute top-1/3 right-[8%] w-48 h-48 rounded-full bg-white/[0.05] pointer-events-none" />
+            <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-white/4 pointer-events-none" />
+            <div className="absolute -bottom-28 -left-14 w-125 h-125 rounded-full bg-white/3 pointer-events-none" />
+            <div className="absolute top-1/3 right-[8%] w-48 h-48 rounded-full bg-white/5 pointer-events-none" />
 
             <div className="container mx-auto px-6 py-20">
                 <div className="flex flex-col lg:flex-row items-center gap-16">
@@ -105,7 +105,7 @@ export default function Hero() {
                             {TRIP_ACTIVITIES.map((item: TripActivity, i: number) => (
                                 <div
                                     key={i}
-                                    className="flex items-center gap-3 bg-white/[0.08] rounded-xl px-3.5 py-2.5 mb-2.5"
+                                    className="flex items-center gap-3 bg-white/8 rounded-xl px-3.5 py-2.5 mb-2.5"
                                 >
                                     <span className="text-lg">{item.icon}</span>
                                     <div className="flex-1">
