@@ -31,8 +31,6 @@ function FormParada() {
 
     const isEditing = Boolean(id);
 
-    /* ---------------- BUSCAS ---------------- */
-
     async function buscarParadaPorId(id: string) {
         const data = await buscar(`/paradas/${id}`, undefined, {
             headers: { Authorization: token },
@@ -57,8 +55,6 @@ function FormParada() {
         setViagem(data);
     }
 
-    /* ---------------- INIT ---------------- */
-
     useEffect(() => {
         buscarCidades();
 
@@ -74,8 +70,6 @@ function FormParada() {
             }));
         }
     }, [id, viagemId]);
-
-    /* ---------------- FORM ---------------- */
 
     function atualizarEstado(
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -117,7 +111,6 @@ function FormParada() {
         }
     }
 
-    /* ---------------- FILTER CIDADES ---------------- */
 
     const cidadesFiltradas = cidades.filter((c) =>
         c.nome.toLowerCase().includes(cidadeBusca.toLowerCase())
@@ -141,7 +134,6 @@ function FormParada() {
 
             <form onSubmit={salvarParada} className="flex flex-col gap-5">
 
-                {/* ORDEM */}
                 <input
                     type="number"
                     name="ordem"
@@ -152,7 +144,6 @@ function FormParada() {
                     required
                 />
 
-                {/* DATAS */}
                 <div className="grid grid-cols-2 gap-4">
                     <input
                         type="date"
@@ -171,12 +162,10 @@ function FormParada() {
                     />
                 </div>
 
-                {/* VIAGEM FIXA */}
                 <div className="p-3 bg-gray-50 rounded-xl text-gray-700">
                     {viagem?.titulo ?? 'Carregando viagem...'}
                 </div>
 
-                {/* CIDADE AUTOCOMPLETE */}
                 <div className="relative">
 
                     <label className="text-sm font-semibold text-gray-600">
@@ -235,7 +224,6 @@ function FormParada() {
                 </button>
             </form>
 
-            {/* MODAL CIDADE */}
             <ModalCidade
                 open={mostrarModalCidade}
                 nomeInicial={cidadeBusca}

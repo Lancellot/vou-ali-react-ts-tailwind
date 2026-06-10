@@ -28,7 +28,7 @@ function CardParada({ parada }: CardParadaProps) {
     return (
         <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col">
             
-            <div className="bg-gradient-to-r from-cyan-500 to-blue-600 h-2 w-full" />
+            <div className="bg-linear-to-r from-cyan-500 to-blue-600 h-2 w-full" />
 
             <div className="p-5 flex flex-col gap-3 flex-1">
 
