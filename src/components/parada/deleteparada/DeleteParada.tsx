@@ -24,12 +24,12 @@ function DeletarParada() {
     async function confirmarDelecao() {
         setIsLoading(true);
         try {
-            await deletar(`/paradas/${id}`, {
+            await deletar(`/paradas/remover/${id}`, {
                 headers: { Authorization: token },
             });
 
             ToastAlerta('Parada excluída com sucesso!', 'sucesso');
-            navigate('/paradas');
+            navigate(-1);
         } catch {
             ToastAlerta('Erro ao excluir parada.', 'erro');
         } finally {
@@ -67,7 +67,7 @@ function DeletarParada() {
 
                 <div className="flex gap-3 justify-center">
                     <button
-                        onClick={() => navigate('/paradas')}
+                        onClick={() => navigate(`/detalhes-viagem/${parada?.viagemId}`)}
                         className="flex items-center gap-2 border border-gray-200 text-gray-600 hover:bg-gray-50 font-semibold px-5 py-2.5 rounded-xl transition"
                     >
                         <X size={16} />
