@@ -11,16 +11,22 @@ import {
     Trash2,
 } from 'lucide-react';
 
+import ModalDespesa from '../../components/despesa/modaldespesa/ModalDespesa';
+
+
+
+
 function DetalhesViagem() {
     const { id } = useParams();
     const { usuario } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [viagem, setViagem] = useState<any>();
+    const [viagem, setViagem] = useState<any>(null);
 
     const [modalAtividade, setModalAtividade] = useState(false);
     const [paradaSelecionada, setParadaSelecionada] =
         useState<number | null>(null);
+    const [modalDespesa, setModalDespesa] = useState(false);
 
     async function buscarViagemCompleta() {
         try {
@@ -242,7 +248,7 @@ function DetalhesViagem() {
                 </div>
             </div>
 
-            {/* DESPESAS */}
+
             <div className="bg-white rounded-2xl shadow p-6">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-bold">
@@ -250,8 +256,10 @@ function DetalhesViagem() {
                     </h2>
 
                     <button
-                        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium"
+                        onClick={() => setModalDespesa(true)}
+                        className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2"
                     >
+                        <Plus size={16} />
                         Nova Despesa
                     </button>
                 </div>
@@ -262,7 +270,7 @@ function DetalhesViagem() {
                             {viagem.despesas.map((despesa: any) => (
                                 <div
                                     key={despesa.id}
-                                    className="flex justify-between border-b pb-3"
+                                    className="flex justify-between items-center border-b pb-3"
                                 >
                                     <div>
                                         <p className="font-medium">
@@ -272,12 +280,42 @@ function DetalhesViagem() {
                                         <p className="text-sm text-gray-500">
                                             {despesa.categoria}
                                         </p>
+
+                                        {despesa.data && (
+                                            <p className="text-xs text-gray-400">
+                                                {new Date(
+                                                    despesa.data
+                                                ).toLocaleDateString('pt-BR')}
+                                            </p>
+                                        )}
                                     </div>
 
-                                    <div className="font-bold text-red-500">
-                                        R$ {Number(
-                                            despesa.valor
-                                        ).toFixed(2)}
+                                    <div className="flex items-center gap-4">
+
+                                        <div className="font-bold text-red-500">
+                                            R$ {Number(despesa.valor).toFixed(2)}
+                                        </div>
+
+                                        <button
+                                            onClick={() =>
+                                                navigate(`/editar-despesa/${despesa.id}`)
+                                            }
+                                            className="p-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white"
+                                            title="Editar despesa"
+                                        >
+                                            <Pencil size={16} />
+                                        </button>
+
+                                        <button
+                                            onClick={() =>
+                                                navigate(`/deletar-despesa/${despesa.id}`)
+                                            }
+                                            className="p-2 rounded-lg bg-red-500 hover:bg-red-600 text-white"
+                                            title="Excluir despesa"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+
                                     </div>
                                 </div>
                             ))}
@@ -296,7 +334,7 @@ function DetalhesViagem() {
                 )}
             </div>
 
-            {/* MODAL DE ATIVIDADE */}
+
             {paradaSelecionada && (
                 <ModalAtividade
                     open={modalAtividade}
@@ -305,6 +343,18 @@ function DetalhesViagem() {
                         setModalAtividade(false);
                         setParadaSelecionada(null);
                     }}
+                    onCreated={() => {
+                        buscarViagemCompleta();
+                    }}
+                />
+
+            )}
+
+            {modalDespesa && (
+                <ModalDespesa
+                    open={modalDespesa}
+                    viagemId={viagem.id}
+                    onClose={() => setModalDespesa(false)}
                     onCreated={() => {
                         buscarViagemCompleta();
                     }}
