@@ -1,4 +1,9 @@
-import { useContext, useEffect, useState, type ChangeEvent } from 'react';
+import {
+    useContext,
+    useEffect,
+    useState,
+    type ChangeEvent,
+} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import type { Parada } from '../../../models/Parada';
@@ -7,6 +12,8 @@ import { atualizar, buscar, cadastrar } from '../../../services/Service';
 import { ToastAlerta } from '../../../utils/ToastAlerta';
 import { Loader2 } from 'lucide-react';
 
+import ModalCidade from '../../cidade/modalcidade/ModalCidade';
+
 function FormParada() {
     const navigate = useNavigate();
     const { id, viagemId } = useParams<{ id?: string; viagemId?: string }>();
@@ -14,29 +21,43 @@ function FormParada() {
     const token = usuario.token;
 
     const [isLoading, setIsLoading] = useState(false);
+
     const [parada, setParada] = useState<Parada>({} as Parada);
     const [cidades, setCidades] = useState<Cidade[]>([]);
     const [viagem, setViagem] = useState<any>(null);
 
+    const [cidadeBusca, setCidadeBusca] = useState('');
+    const [mostrarModalCidade, setMostrarModalCidade] = useState(false);
+
     const isEditing = Boolean(id);
 
+    /* ---------------- BUSCAS ---------------- */
+
     async function buscarParadaPorId(id: string) {
-        await buscar(`/paradas/${id}`, setParada, {
+        const data = await buscar(`/paradas/${id}`, undefined, {
             headers: { Authorization: token },
         });
+
+        setParada(data);
     }
 
     async function buscarCidades() {
-        await buscar('/cidades/all', setCidades, {
+        const data = await buscar('/cidades/all', undefined, {
             headers: { Authorization: token },
         });
+
+        setCidades(data);
     }
 
     async function buscarViagem() {
-        await buscar(`/viagens/${viagemId}`, setViagem, {
+        const data = await buscar(`/viagens/${viagemId}`, undefined, {
             headers: { Authorization: token },
         });
+
+        setViagem(data);
     }
+
+    /* ---------------- INIT ---------------- */
 
     useEffect(() => {
         buscarCidades();
@@ -54,6 +75,8 @@ function FormParada() {
         }
     }, [id, viagemId]);
 
+    /* ---------------- FORM ---------------- */
+
     function atualizarEstado(
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) {
@@ -61,10 +84,9 @@ function FormParada() {
 
         setParada((prev) => ({
             ...prev,
-            [name]:
-                name === 'ordem' || name === 'viagemId' || name === 'cidadeId'
-                    ? Number(value)
-                    : value,
+            [name]: ['ordem', 'viagemId', 'cidadeId'].includes(name)
+                ? Number(value)
+                : value,
         }));
     }
 
@@ -78,28 +100,35 @@ function FormParada() {
                     headers: { Authorization: token },
                 });
 
-                ToastAlerta('Parada atualizada com sucesso!', 'sucesso');
+                ToastAlerta('Parada atualizada!', 'sucesso');
             } else {
                 await cadastrar('/paradas/cadastrar', parada, setParada, {
                     headers: { Authorization: token },
                 });
 
-                ToastAlerta('Parada criada com sucesso!', 'sucesso');
+                ToastAlerta('Parada criada!', 'sucesso');
             }
 
             navigate('/paradas');
         } catch {
-            ToastAlerta('Erro ao salvar parada.', 'erro');
+            ToastAlerta('Erro ao salvar parada', 'erro');
         } finally {
             setIsLoading(false);
         }
     }
 
+    /* ---------------- FILTER CIDADES ---------------- */
+
+    const cidadesFiltradas = cidades.filter((c) =>
+        c.nome.toLowerCase().includes(cidadeBusca.toLowerCase())
+    );
+
     const inputClass =
-        'w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition';
+        'w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-400';
 
     return (
         <div className="max-w-xl mx-auto px-4 py-10">
+
             <h2 className="text-3xl font-bold text-gray-800 mb-2">
                 {isEditing ? 'Editar Parada' : 'Nova Parada'}
             </h2>
@@ -112,92 +141,117 @@ function FormParada() {
 
             <form onSubmit={salvarParada} className="flex flex-col gap-5">
 
-                <div className="flex flex-col gap-1">
-                    <label className="text-sm font-semibold text-gray-600">
-                        Ordem
-                    </label>
+                {/* ORDEM */}
+                <input
+                    type="number"
+                    name="ordem"
+                    value={parada.ordem || ''}
+                    onChange={atualizarEstado}
+                    placeholder="Ordem"
+                    className={inputClass}
+                    required
+                />
+
+                {/* DATAS */}
+                <div className="grid grid-cols-2 gap-4">
                     <input
-                        type="number"
-                        name="ordem"
-                        value={parada.ordem || ''}
+                        type="date"
+                        name="dataChegada"
+                        value={parada.dataChegada || ''}
                         onChange={atualizarEstado}
                         className={inputClass}
-                        required
+                    />
+
+                    <input
+                        type="date"
+                        name="dataSaida"
+                        value={parada.dataSaida || ''}
+                        onChange={atualizarEstado}
+                        className={inputClass}
                     />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-1">
-                        <label className="text-sm font-semibold text-gray-600">
-                            Data Chegada
-                        </label>
-                        <input
-                            type="date"
-                            name="dataChegada"
-                            value={parada.dataChegada || ''}
-                            onChange={atualizarEstado}
-                            className={inputClass}
-                        />
-                    </div>
-
-                    <div className="flex flex-col gap-1">
-                        <label className="text-sm font-semibold text-gray-600">
-                            Data Saída
-                        </label>
-                        <input
-                            type="date"
-                            name="dataSaida"
-                            value={parada.dataSaida || ''}
-                            onChange={atualizarEstado}
-                            className={inputClass}
-                        />
-                    </div>
+                {/* VIAGEM FIXA */}
+                <div className="p-3 bg-gray-50 rounded-xl text-gray-700">
+                    {viagem?.titulo ?? 'Carregando viagem...'}
                 </div>
 
+                {/* CIDADE AUTOCOMPLETE */}
+                <div className="relative">
 
-                <div className="flex flex-col gap-1">
-                    <label className="text-sm font-semibold text-gray-600">
-                        Viagem
-                    </label>
-
-                    <div className="w-full border border-gray-200 rounded-xl px-4 py-2.5 bg-gray-50 text-gray-700">
-                        {viagem?.titulo ?? 'Carregando viagem...'}
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-1">
                     <label className="text-sm font-semibold text-gray-600">
                         Cidade
                     </label>
 
-                    <select
-                        name="cidadeId"
-                        value={parada.cidadeId || ''}
-                        onChange={atualizarEstado}
+                    <input
+                        type="text"
+                        value={cidadeBusca}
+                        onChange={(e) => setCidadeBusca(e.target.value)}
+                        placeholder="Digite a cidade..."
                         className={inputClass}
-                        required
-                    >
-                        <option value="">Selecione uma cidade</option>
+                    />
 
-                        {cidades.map((cidade) => (
-                            <option key={cidade.id} value={cidade.id}>
-                                {cidade.nome}
-                            </option>
-                        ))}
-                    </select>
+                    {cidadeBusca && (
+                        <div className="absolute z-10 w-full bg-white border rounded-xl shadow max-h-48 overflow-auto">
+
+                            {cidadesFiltradas.map((cidade) => (
+                                <div
+                                    key={cidade.id}
+                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                    onClick={() => {
+                                        setParada((prev) => ({
+                                            ...prev,
+                                            cidadeId: cidade.id!,
+                                        }));
+
+                                        setCidadeBusca(cidade.nome);
+                                    }}
+                                >
+                                    {cidade.nome}
+                                </div>
+                            ))}
+
+                            {cidadesFiltradas.length === 0 && (
+                                <button
+                                    type="button"
+                                    onClick={() => setMostrarModalCidade(true)}
+                                    className="w-full text-left px-4 py-2 text-cyan-600 font-semibold hover:bg-gray-100"
+                                >
+                                    + Criar "{cidadeBusca}"
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
 
+                {/* SUBMIT */}
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="flex justify-center items-center gap-2 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-60 text-white font-bold py-3 rounded-xl transition-colors mt-2"
+                    className="flex justify-center items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl"
                 >
-                    {isLoading && (
-                        <Loader2 size={18} className="animate-spin" />
-                    )}
-                    {isEditing ? 'Atualizar Parada' : 'Criar Parada'}
+                    {isLoading && <Loader2 size={18} className="animate-spin" />}
+                    {isEditing ? 'Atualizar' : 'Criar'}
                 </button>
             </form>
+
+            {/* MODAL CIDADE */}
+            <ModalCidade
+                open={mostrarModalCidade}
+                nomeInicial={cidadeBusca}
+                onClose={() => setMostrarModalCidade(false)}
+                onCreated={(cidade) => {
+                    setCidades((prev) => [...prev, cidade]);
+
+                    setParada((prev) => ({
+                        ...prev,
+                        cidadeId: cidade.id!,
+                    }));
+
+                    setCidadeBusca(cidade.nome);
+                    setMostrarModalCidade(false);
+                }}
+            />
         </div>
     );
 }
