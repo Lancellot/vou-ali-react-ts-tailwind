@@ -11,6 +11,8 @@ import ListaViagens from './components/viagem/listaviagem/ListaViagem'
 import DeleteViagem from './components/viagem/deletarviagem/DeleteViagem'
 import FormViagem from './components/viagem/formviagem/FormViagem'
 import DetalhesViagem from './pages/viagens/DetalhesViagem'
+import FormParada from './components/parada/formparada/FormParada'
+import DeleteParada from './components/parada/deleteparada/DeleteParada'
 
 function App() {
 
@@ -30,14 +32,21 @@ function App() {
                 <Route path='*' element={<Home />} />
                 <Route path='/' element={<Home />} />
                 <Route path='/home' element={<Home />} />
+
                 <Route path='/cadastro' element={<Cadastro />} />
                 <Route path='/login' element={<Login />} />
+
                 <Route path='/viagens/*' element={<ListaViagens />} />
                 <Route path='/viagens' element={<ListaViagens />} />
+
                 <Route path='/cadastrarviagem/*' element={<FormViagem />} />
                 <Route path='/editarviagem/:id' element={<FormViagem />} />
                 <Route path='/deletarviagem/:id' element={<DeleteViagem />} />
                 <Route path='/detalhesviagem/:id' element={<DetalhesViagem />} />
+
+                <Route path='/cadastrar-parada/:viagemId' element={<FormParada />} />
+                <Route path='/editar-parada/:id' element={<FormParada />} />
+                <Route path='/deletar-parada/:id' element={<DeleteParada />} />
 
               </Routes>
             </main>

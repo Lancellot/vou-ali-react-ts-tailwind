@@ -1,73 +1,80 @@
-import { Link } from 'react-router-dom';
 import type { Parada } from '../../../models/Parada';
-import { MapPin, Calendar, Activity, Pencil, Trash2 } from 'lucide-react';
+import { MapPin, Calendar, Hash, ChevronRight, Trash2, Pencil } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface CardParadaProps {
     parada: Parada;
 }
 
 function CardParada({ parada }: CardParadaProps) {
-    const formatarData = (data?: string) =>
-        data
-            ? new Date(data).toLocaleDateString('pt-BR', {
-                  day: '2-digit',
-                  month: 'short',
-              })
-            : '—';
+
+    const formatarData = (data?: string) => {
+        if (!data) return '—';
+
+        return new Date(data).toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+        });
+    };
 
     return (
-        <div className="bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col gap-3">
-            <div className="flex items-start justify-between gap-2">
-                <div className="flex items-center gap-2">
-                    <span className="bg-teal-100 text-teal-700 text-xs font-bold px-2 py-0.5 rounded-full">
-                        Parada #{parada.ordem}
+        <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col">
+            <div className="bg-gradient-to-r from-cyan-500 to-blue-600 h-2 w-full" />
+
+            <div className="p-5 flex flex-col gap-3 flex-1">
+
+                <h3 className="text-xl font-bold text-gray-800 line-clamp-1">
+                    Parada #{parada.ordem}
+                </h3>
+
+                <div className="flex items-center gap-2 text-gray-500 text-sm">
+                    <Hash size={15} className="text-cyan-500 shrink-0" />
+                    <span>Ordem: {parada.ordem}</span>
+                </div>
+
+                <div className="flex items-center gap-2 text-gray-500 text-sm">
+                    <Calendar size={15} className="text-cyan-500 shrink-0" />
+                    <span>
+                        {formatarData(parada.dataChegada)} → {formatarData(parada.dataSaida)}
                     </span>
                 </div>
-                <div className="flex gap-2">
+
+                <div className="flex items-center gap-2 text-gray-500 text-sm">
+                    <MapPin size={15} className="text-cyan-500 shrink-0" />
+                    <span>
+                        Cidade ID: {parada.cidade?.nome || '—'}
+                    </span>
+                </div>
+
+                <div className="flex gap-2 mt-auto pt-3 border-t border-gray-100">
+
                     <Link
                         to={`/editarparada/${parada.id}`}
-                        className="text-gray-400 hover:text-teal-600 transition-colors"
-                        title="Editar"
+                        className="flex items-center gap-1 text-sm text-cyan-600 hover:text-cyan-800 font-medium transition-colors"
                     >
-                        <Pencil size={15} />
+                        <Pencil size={14} />
+                        Editar
                     </Link>
+
                     <Link
                         to={`/deletarparada/${parada.id}`}
-                        className="text-gray-400 hover:text-red-500 transition-colors"
-                        title="Excluir"
+                        className="flex items-center gap-1 text-sm text-red-500 hover:text-red-700 font-medium transition-colors ml-auto"
                     >
-                        <Trash2 size={15} />
+                        <Trash2 size={14} />
+                        Excluir
                     </Link>
+
+                    <Link
+                        to={`/detalhesparada/${parada.id}`}
+                        className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                    >
+                        Ver detalhes
+                        <ChevronRight size={14} />
+                    </Link>
+
                 </div>
             </div>
-
-            {parada.cidade && (
-                <div className="flex items-center gap-2 text-gray-700 font-semibold text-base">
-                    <MapPin size={16} className="text-teal-500 shrink-0" />
-                    <span>
-                        {parada.cidade.nome}
-                        {parada.cidade.pais && (
-                            <span className="text-gray-400 font-normal">
-                                {' '}· {parada.cidade.pais}
-                            </span>
-                        )}
-                    </span>
-                </div>
-            )}
-
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
-                <Calendar size={14} className="text-teal-400 shrink-0" />
-                <span>
-                    {formatarData(parada.dataChegada)} → {formatarData(parada.dataSaida)}
-                </span>
-            </div>
-
-            {parada.atividades && parada.atividades.length > 0 && (
-                <div className="flex items-center gap-2 text-gray-500 text-sm">
-                    <Activity size={14} className="text-cyan-400 shrink-0" />
-                    <span>{parada.atividades.length} atividade(s)</span>
-                </div>
-            )}
         </div>
     );
 }
