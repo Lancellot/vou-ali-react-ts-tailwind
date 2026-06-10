@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import type { Viagem } from '../../../models/Viagem';
 import { buscar } from '../../../services/Service';
-import { ToastAlerta } from '../../../utils/ToastAlerta';
 import CardViagem from '../cardviagem/CardViagem';
 import { Link } from 'react-router-dom';
 import { Plus, Loader2 } from 'lucide-react';

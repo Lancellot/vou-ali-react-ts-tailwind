@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { buscar } from '../../services/Service';
 import { ToastAlerta } from '../../utils/ToastAlerta';
@@ -7,6 +7,7 @@ import { ToastAlerta } from '../../utils/ToastAlerta';
 function DetalhesViagem() {
     const { id } = useParams();
     const { usuario } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [viagem, setViagem] = useState<any>();
 
@@ -76,7 +77,10 @@ function DetalhesViagem() {
                         🚏 Paradas
                     </h2>
 
-                    <button className="bg-teal-600 text-white px-4 py-2 rounded-lg">
+                    <button
+                        onClick={() => navigate(`/cadastrar-parada/${viagem.id}`)}
+                        className="bg-teal-600 text-white px-4 py-2 rounded-lg"
+                    >
                         Nova Parada
                     </button>
                 </div>

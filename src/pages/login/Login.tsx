@@ -14,6 +14,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { AuthContext } from '../../contexts/AuthContext';
 import type { UsuarioLogin } from '../../models/UsuarioLogin';
 import googleLogo from '../../assets/logos/google.png';
+import Logologin from '../../assets/logos/logologin.png';
 
 type GoogleCredentialResponse = {
     credential?: string;
@@ -103,11 +104,30 @@ function Login() {
         await handleLogin(usuarioLogin);
     }
 
-    return (
-        <div className="login-container min-h-screen flex items-center justify-center bg-indigo-500 px-4">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-xl p-8">
+return (
+    <div className="min-h-screen bg-[#1E1F1D] flex">
+
+        
+        <div className="hidden lg:flex w-1/2 items-center justify-center p-12">
+            <div className="max-w-xl">
+                {/* Troque pela sua imagem */}
+                <img
+                    src={Logologin}
+                    alt="Vou Ali"
+                    className="w-full h-auto object-contain"
+                />
+            </div>
+        </div>
+
+        {/* Área do Login */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-8">
+            <div className="w-full max-w-md bg-[#DED9BE] rounded-2xl shadow-2xl p-8">
+
                 <form onSubmit={loginSubmit}>
-                    <h2 className="text-2xl font-semibold text-center mb-6">
+                    <h2
+                        className="text-3xl font-bold text-center mb-8 text-[#1E1F1D]"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
                         Faça Login
                     </h2>
 
@@ -117,24 +137,55 @@ function Login() {
                         placeholder="Email"
                         value={usuarioLogin.email}
                         onChange={atualizarEstado}
-                        className="mb-4 w-full h-14 px-4 border rounded-md"
+                        className="
+                            mb-4
+                            w-full
+                            h-14
+                            px-4
+                            border
+                            border-[#1E1F1D]/20
+                            rounded-md
+                            bg-white
+                            focus:outline-none
+                            focus:ring-2
+                            focus:ring-[#1E1F1D]
+                        "
                         required
                     />
 
                     <div className="relative mb-6">
                         <input
-                            type={mostrarSenha ? "text" : "password"}
+                            type={mostrarSenha ? 'text' : 'password'}
                             name="senha"
                             placeholder="Senha"
                             value={usuarioLogin.senha}
                             onChange={atualizarEstado}
-                            className="mb-6 w-full h-14 px-4 border rounded-md"
+                            className="
+                                w-full
+                                h-14
+                                px-4
+                                border
+                                border-[#1E1F1D]/20
+                                rounded-md
+                                bg-white
+                                focus:outline-none
+                                focus:ring-2
+                                focus:ring-[#1E1F1D]
+                            "
                             required
                         />
+
                         <button
                             type="button"
                             onClick={() => setMostrarSenha(!mostrarSenha)}
-                            className="absolute right-3 top-1/3 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            className="
+                                absolute
+                                right-3
+                                top-1/2
+                                -translate-y-1/2
+                                text-[#1E1F1D]/60
+                                hover:text-[#1E1F1D]
+                            "
                         >
                             {mostrarSenha ? (
                                 <EyeOff size={20} />
@@ -143,40 +194,85 @@ function Login() {
                             )}
                         </button>
                     </div>
+
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full h-14 bg-indigo-600 text-white rounded-md flex justify-center items-center hover:bg-indigo-700"
+                        className="
+                            w-full
+                            h-14
+                            bg-[#1E1F1D]
+                            text-[#DED9BE]
+                            rounded-md
+                            flex
+                            justify-center
+                            items-center
+                            hover:bg-black
+                            transition-colors
+                            font-medium
+                        "
                     >
-                        {isLoading ? <ClipLoader size={20} color="#fff" /> : 'Entrar'}
+                        {isLoading ? (
+                            <ClipLoader size={20} color="#DED9BE" />
+                        ) : (
+                            'Entrar'
+                        )}
                     </button>
 
-                    <div className="relative text-center mt-6">
-                        <span className="bg-white px-3 relative z-10 text-gray-500">
+                    <div className="relative text-center my-6">
+                        <span className="bg-[#DED9BE] px-3 relative z-10 text-[#1E1F1D]/60">
                             ou
                         </span>
-                        <div className="absolute left-0 top-1/2 w-full h-px bg-gray-300" />
+
+                        <div className="absolute left-0 top-1/2 w-full h-px bg-[#1E1F1D]/20" />
                     </div>
 
                     <button
                         type="button"
                         onClick={openGoogleLogin}
-                        className="w-full mt-4 flex items-center justify-center gap-2 border rounded-md h-14 hover:bg-gray-100  bg-white hover:bg-gray-100"
+                        className="
+                            w-full
+                            h-14
+                            flex
+                            items-center
+                            justify-center
+                            gap-3
+                            border
+                            border-[#1E1F1D]/20
+                            rounded-md
+                            bg-white
+                            hover:bg-[#f5f2e4]
+                            transition-colors
+                        "
                     >
-                        <img src={googleLogo} className="w-5 h-5" />
-                        Entrar com Google
+                        <img
+                            src={googleLogo}
+                            alt="Google"
+                            className="w-5 h-5"
+                        />
+                        <span className="text-[#1E1F1D]">
+                            Entrar com Google
+                        </span>
                     </button>
 
-                    <p className="text-center mt-6">
+                    <p className="text-center mt-8 text-[#1E1F1D]/80">
                         Não tem conta?{' '}
-                        <Link to="/cadastro" className="text-indigo-600">
+                        <Link
+                            to="/cadastro"
+                            className="font-semibold text-[#1E1F1D] hover:underline"
+                        >
                             Cadastre-se
                         </Link>
                     </p>
                 </form>
+
             </div>
         </div>
-    );
+
+    </div>
+);
+
+
 }
 
 export default Login;
