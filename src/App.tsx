@@ -13,6 +13,8 @@ import FormViagem from './components/viagem/formviagem/FormViagem'
 import DetalhesViagem from './pages/viagens/DetalhesViagem'
 import FormParada from './components/parada/formparada/FormParada'
 import DeleteParada from './components/parada/deleteparada/DeleteParada'
+import FormAtividade from './components/atividade/formatividade/Formatividade'
+import DeletarAtividade from './components/atividade/deleteatividade.tsx/DeletarAtividade'
 
 function App() {
 
@@ -47,6 +49,10 @@ function App() {
                 <Route path='/cadastrar-parada/:viagemId' element={<FormParada />} />
                 <Route path='/editar-parada/:id' element={<FormParada />} />
                 <Route path='/deletar-parada/:id' element={<DeleteParada />} />
+
+                <Route path='/atividades/cadastrar/:paradaId' element={<FormAtividade />} />
+                <Route path='/editar-atividade/:id' element={<FormAtividade />} />
+                <Route path='/deletar-atividade/:id' element={<DeletarAtividade />} />
 
               </Routes>
             </main>

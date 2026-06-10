@@ -90,7 +90,7 @@ function FormParada() {
 
         try {
             if (isEditing) {
-                await atualizar('/paradas', parada, setParada, {
+                await atualizar(`/paradas/atualizar`, parada, setParada, {
                     headers: { Authorization: token },
                 });
 
@@ -103,7 +103,7 @@ function FormParada() {
                 ToastAlerta('Parada criada!', 'sucesso');
             }
 
-            navigate('/paradas');
+            navigate(-1);
         } catch {
             ToastAlerta('Erro ao salvar parada', 'erro');
         } finally {
@@ -213,7 +213,6 @@ function FormParada() {
                     )}
                 </div>
 
-                {/* SUBMIT */}
                 <button
                     type="submit"
                     disabled={isLoading}
