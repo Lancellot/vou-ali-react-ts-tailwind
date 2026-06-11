@@ -17,6 +17,8 @@ import FormAtividade from './components/atividade/formatividade/Formatividade'
 import DeletarAtividade from './components/atividade/deleteatividade.tsx/DeletarAtividade'
 import DeletarDespesa from './components/despesa/deletedespesa/DeletarDespesa'
 import FormDespesa from './components/despesa/formdespesa/FormDespesa'
+import  Dashboard  from './pages/dashboard/DashBoard'
+import Sobre from './pages/sobre/Sobre'
 
 function App() {
 
@@ -30,7 +32,7 @@ function App() {
               <Navbar/>
             </header>
 
-            <main className="flex-1">
+            <main className="flex-1 min-h-screen">
               <Routes>
 
                 <Route path='*' element={<Home />} />
@@ -59,6 +61,10 @@ function App() {
                 <Route path='/cadastrar-despesa/:viagemId' element={<FormDespesa />} />
                 <Route path='/editar-despesa/:id' element={<FormDespesa />} />
                 <Route path='/deletar-despesa/:id' element={<DeletarDespesa />} />
+
+                <Route path='/dashboard' element={<Dashboard />} />
+
+                <Route path='/sobre' element={<Sobre />} />
 
               </Routes>
             </main>

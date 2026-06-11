@@ -22,8 +22,6 @@ function Navbar() {
             ]
             : []),
 
-        { label: "Sobre", path: "/sobre" },
-
         ...(!isAuthenticated
             ? [
                 { label: "Login", path: "/login" },
