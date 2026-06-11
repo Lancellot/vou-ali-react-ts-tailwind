@@ -1,5 +1,12 @@
 import type { Parada } from '../../../models/Parada';
-import { MapPin, Calendar, Hash, ChevronRight, Trash2, Pencil } from 'lucide-react';
+import {
+    MapPin,
+    Calendar,
+    Hash,
+    ChevronRight,
+    Trash2,
+    Pencil
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface CardParadaProps {
@@ -20,12 +27,13 @@ function CardParada({ parada }: CardParadaProps) {
 
     return (
         <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col">
-            <div className="bg-gradient-to-r from-cyan-500 to-blue-600 h-2 w-full" />
+            
+            <div className="bg-linear-to-r from-cyan-500 to-blue-600 h-2 w-full" />
 
             <div className="p-5 flex flex-col gap-3 flex-1">
 
                 <h3 className="text-xl font-bold text-gray-800 line-clamp-1">
-                    Parada #{parada.ordem}
+                    {parada.cidade?.nome || 'Cidade não definida'}
                 </h3>
 
                 <div className="flex items-center gap-2 text-gray-500 text-sm">
@@ -43,7 +51,7 @@ function CardParada({ parada }: CardParadaProps) {
                 <div className="flex items-center gap-2 text-gray-500 text-sm">
                     <MapPin size={15} className="text-cyan-500 shrink-0" />
                     <span>
-                        Cidade ID: {parada.cidade?.nome || '—'}
+                        {parada.cidade?.estado} - {parada.cidade?.pais}
                     </span>
                 </div>
 
@@ -51,7 +59,7 @@ function CardParada({ parada }: CardParadaProps) {
 
                     <Link
                         to={`/editarparada/${parada.id}`}
-                        className="flex items-center gap-1 text-sm text-cyan-600 hover:text-cyan-800 font-medium transition-colors"
+                        className="flex items-center gap-1 text-sm text-cyan-600 hover:text-cyan-800 font-medium"
                     >
                         <Pencil size={14} />
                         Editar
@@ -59,7 +67,7 @@ function CardParada({ parada }: CardParadaProps) {
 
                     <Link
                         to={`/deletarparada/${parada.id}`}
-                        className="flex items-center gap-1 text-sm text-red-500 hover:text-red-700 font-medium transition-colors ml-auto"
+                        className="flex items-center gap-1 text-sm text-red-500 hover:text-red-700 font-medium ml-auto"
                     >
                         <Trash2 size={14} />
                         Excluir
@@ -67,7 +75,7 @@ function CardParada({ parada }: CardParadaProps) {
 
                     <Link
                         to={`/detalhesparada/${parada.id}`}
-                        className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                        className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium"
                     >
                         Ver detalhes
                         <ChevronRight size={14} />

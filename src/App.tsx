@@ -13,6 +13,12 @@ import FormViagem from './components/viagem/formviagem/FormViagem'
 import DetalhesViagem from './pages/viagens/DetalhesViagem'
 import FormParada from './components/parada/formparada/FormParada'
 import DeleteParada from './components/parada/deleteparada/DeleteParada'
+import FormAtividade from './components/atividade/formatividade/Formatividade'
+import DeletarAtividade from './components/atividade/deleteatividade.tsx/DeletarAtividade'
+import DeletarDespesa from './components/despesa/deletedespesa/DeletarDespesa'
+import FormDespesa from './components/despesa/formdespesa/FormDespesa'
+import  Dashboard  from './pages/dashboard/DashBoard'
+import Sobre from './pages/sobre/Sobre'
 
 function App() {
 
@@ -26,7 +32,7 @@ function App() {
               <Navbar/>
             </header>
 
-            <main className="flex-1">
+            <main className="flex-1 min-h-screen">
               <Routes>
 
                 <Route path='*' element={<Home />} />
@@ -47,6 +53,18 @@ function App() {
                 <Route path='/cadastrar-parada/:viagemId' element={<FormParada />} />
                 <Route path='/editar-parada/:id' element={<FormParada />} />
                 <Route path='/deletar-parada/:id' element={<DeleteParada />} />
+
+                <Route path='/atividades/cadastrar/:paradaId' element={<FormAtividade />} />
+                <Route path='/editar-atividade/:id' element={<FormAtividade />} />
+                <Route path='/deletar-atividade/:id' element={<DeletarAtividade />} />
+
+                <Route path='/cadastrar-despesa/:viagemId' element={<FormDespesa />} />
+                <Route path='/editar-despesa/:id' element={<FormDespesa />} />
+                <Route path='/deletar-despesa/:id' element={<DeletarDespesa />} />
+
+                <Route path='/dashboard' element={<Dashboard />} />
+
+                <Route path='/sobre' element={<Sobre />} />
 
               </Routes>
             </main>
