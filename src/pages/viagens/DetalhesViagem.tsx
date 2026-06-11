@@ -297,7 +297,7 @@ function DetalhesViagem() {
                                         </p>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <span className="text-sm font-semibold text-red-600 min-w-[90px] text-right">
+                                        <span className="text-sm font-semibold text-red-600 min-w-22.5 text-right">
                                             R$ {Number(despesa.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                                         </span>
                                         <button

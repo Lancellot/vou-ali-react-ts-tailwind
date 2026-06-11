@@ -17,7 +17,8 @@ import FormAtividade from './components/atividade/formatividade/Formatividade'
 import DeletarAtividade from './components/atividade/deleteatividade.tsx/DeletarAtividade'
 import DeletarDespesa from './components/despesa/deletedespesa/DeletarDespesa'
 import FormDespesa from './components/despesa/formdespesa/FormDespesa'
-import  Dashboard  from './pages/dashboard/Dashboard'
+import  Dashboard  from './pages/dashboard/DashBoard'
+import Sobre from './pages/sobre/Sobre'
 
 function App() {
 
@@ -62,6 +63,8 @@ function App() {
                 <Route path='/deletar-despesa/:id' element={<DeletarDespesa />} />
 
                 <Route path='/dashboard' element={<Dashboard />} />
+
+                <Route path='/sobre' element={<Sobre />} />
 
               </Routes>
             </main>

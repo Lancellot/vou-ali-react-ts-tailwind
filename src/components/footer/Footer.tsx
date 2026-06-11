@@ -4,6 +4,7 @@ import {
     LinkedinLogoIcon,
 } from "@phosphor-icons/react";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 function Footer() {
@@ -11,6 +12,17 @@ function Footer() {
     const { isAuthenticated } = useContext(AuthContext);
 
     if (!isAuthenticated) return null;
+
+    const navegacao = [
+        { label: "Home", to: "/home" },
+        { label: "Sobre", to: "/sobre" },
+        { label: "Contato", to: "/contato" },
+    ];
+
+    const recursos = [
+        { label: "Planejamento de Viagens", to: "/viagens" },
+        { label: "Dashboard", to: "/dashboard" },
+    ];
 
     return (
         <footer className="w-full bg-[#1E1F1D] text-[#DED9BE]">
@@ -66,14 +78,14 @@ function Footer() {
                         </h3>
 
                         <ul className="flex flex-col gap-2">
-                            {["Home", "Sobre", "Contato"].map((item) => (
-                                <li key={item}>
-                                    <a
-                                        href="#"
+                            {navegacao.map(({ label, to }) => (
+                                <li key={label}>
+                                    <Link
+                                        to={to}
                                         className="text-sm text-[#DED9BE]/70 hover:text-[#DED9BE] transition-colors duration-200"
                                     >
-                                        {item}
-                                    </a>
+                                        {label}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -85,19 +97,14 @@ function Footer() {
                         </h3>
 
                         <ul className="flex flex-col gap-2">
-                            {[
-                                "Planejamento de Viagens",
-                                "Roteiros",
-                                "Despesas",
-                                "Atividades",
-                            ].map((item) => (
-                                <li key={item}>
-                                    <a
-                                        href="#"
+                            {recursos.map(({ label, to }) => (
+                                <li key={label}>
+                                    <Link
+                                        to={to}
                                         className="text-sm text-[#DED9BE]/70 hover:text-[#DED9BE] transition-colors duration-200"
                                     >
-                                        {item}
-                                    </a>
+                                        {label}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -131,4 +138,3 @@ function Footer() {
 }
 
 export default Footer;
-
