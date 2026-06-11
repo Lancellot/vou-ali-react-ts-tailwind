@@ -136,28 +136,26 @@ Visualização completa de:
 
 ### Página Inicial
 
-![Home](docs/screenshots/home.png)
+<img width="1916" height="917" alt="Captura de tela 2026-06-11 155347" src="https://github.com/user-attachments/assets/ad27cb68-472f-4ef8-859a-a2dec26f3d50" />
 
 ### Login
 
-![Login](docs/screenshots/login.png)
+<img width="1545" height="847" alt="Captura de tela 2026-06-11 155801" src="https://github.com/user-attachments/assets/298b6698-caf6-43a0-a736-a9e1c8a8af15" />
 
 ### Cadastro
 
-![Cadastro](docs/screenshots/cadastro.png)
+<img width="1575" height="883" alt="Captura de tela 2026-06-11 155829" src="https://github.com/user-attachments/assets/97b122a8-c5af-415a-9d1b-79aa17cd3b06" />
 
 ### Dashboard
 
-![Dashboard](docs/screenshots/dashboard.png)
+<img width="1536" height="519" alt="Captura de tela 2026-06-11 155709" src="https://github.com/user-attachments/assets/ce5cfec8-5989-4fb8-af54-a2684b096db6" />
 
 ### Lista de Viagens
 
-![Viagens](docs/screenshots/viagens.png)
-
+<img width="1350" height="451" alt="Captura de tela 2026-06-11 155433" src="https://github.com/user-attachments/assets/f203c342-1b6e-45f9-b9eb-21572b6aa0f3" />
 ### Detalhes da Viagem
 
-![Detalhes da Viagem](docs/screenshots/detalhes-viagem.png)
-
+<img width="1644" height="893" alt="Captura de tela 2026-06-11 155656" src="https://github.com/user-attachments/assets/bc131a41-544d-4072-a457-4386c13fc02c" />
 ---
 
 ## Estrutura para Imagens
