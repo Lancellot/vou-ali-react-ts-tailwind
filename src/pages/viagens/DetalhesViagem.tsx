@@ -80,7 +80,7 @@ function DetalhesViagem() {
                         )}
                     </div>
                     <button
-                        onClick={() => navigate(`/editar-viagem/${viagem.id}`)}
+                        onClick={() => navigate(`/editarviagem/${viagem.id}`)}
                         className="shrink-0 flex items-center gap-1.5 text-sm font-medium border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-slate-50 transition-colors"
                     >
                         <Pencil size={13} />

@@ -67,7 +67,7 @@ function DeletarParada() {
 
                 <div className="flex gap-3 justify-center">
                     <button
-                        onClick={() => navigate(`/detalhes-viagem/${parada?.viagemId}`)}
+                        onClick={() => navigate(-1)}
                         className="flex items-center gap-2 border border-gray-200 text-gray-600 hover:bg-gray-50 font-semibold px-5 py-2.5 rounded-xl transition"
                     >
                         <X size={16} />
